@@ -12,18 +12,18 @@
     <div class="logo">Country Explorer</div>
     <ul class="nav-links">
       <li><a href="#all-countries" onclick="showAllCountries()">All Countries</a></li>
-      <li>
-        <a href="#favorites" onclick="showFavorites()">Favorites</a>
-        <span id="favorites-count" class="favorites-count">0</span> <!-- Favorite count -->
-      </li>
+      <li><a href="#favorites" onclick="showFavorites()">Favorites</a></li>
     </ul>
   </header>
 
   <!-- Search Container -->
   <div class="search-container">
-    <input type="text" id="country-search" placeholder="Search by country name..." oninput="filterCountries()">
+    <!-- <input type="text" id="country-search" placeholder="Search by country name..." oninput="filterCountries()"> -->
+     <input type="text" id="country-search" placeholder="Search country" onfocus="showSuggestions()" oninput="filterSuggestions()" />
+  <div id="suggestions" class="suggestions-dropdown"></div>
+
     <input type="text" id="language-search" placeholder="Search by language..." oninput="filterCountries()">
-    <input type="text" id="region-search" placeholder="Search by region..." oninput="filterCountries()">
+    <input type="text" id="region-search" placeholder="Search by region..." oninput="filterCountries()"> <!-- New region search input -->
   </div>
 
   <!-- Country List Container -->

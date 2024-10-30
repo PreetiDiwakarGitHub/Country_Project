@@ -1,4 +1,3 @@
-/* General Body and Navbar Styling */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -10,21 +9,26 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center; 
-    background-color: #007bff;
-    padding: 15px 20px; 
+    background-color: #007bff; /* Blue background */
+    padding: 1rem 2rem;  
     color: white;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased shadow for depth */
+    transition: background-color 0.3s; /* Smooth background transition */
+}
+
+.navbar:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }
 
 .logo {
-    font-size: 24px; 
+    font-size: 1.8rem;  
     font-weight: bold;
 }
 
 .nav-links {
     list-style-type: none;
     display: flex;
-    gap: 20px;
+    gap: 2rem;  
 }
 
 .nav-links a {
@@ -41,28 +45,29 @@ body {
 /* Count Style */
 .favorites-count {
     background: hsl(26, 100%, 62%); /* Yellow background for visibility */
-    border-radius: 10px; /* Rounded corners */
-    padding: 3px 8px; /* Padding for better appearance */
+    border-radius: 10px; 
+    padding: 0.4rem 0.8rem; 
     font-weight: bold;
-    margin-left: 5px; /* Space between link and count */
+    margin-left: 0.5rem; 
 }
 
 /* Search Container Styling */
 .search-container {
-    padding: 20px;
+    padding: 2rem;
     text-align: center;
     background-color: #ffffff; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
-    margin: 20px; 
+    border-radius: 0.5rem; 
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); 
+    margin: 2rem auto; 
+    max-width: 800px; /* Limit max width */
 }
 
 #country-search, #language-search, #region-search {
-    padding: 10px 15px; 
-    margin: 5px; 
+    padding: 0.8rem 1.2rem; 
+    margin: 0.5rem; 
     border: 2px solid #007bff; 
-    border-radius: 5px; 
-    font-size: 16px; 
+    border-radius: 0.3rem; 
+    font-size: 1rem; 
     transition: border-color 0.3s, box-shadow 0.3s; 
 }
 
@@ -74,7 +79,6 @@ body {
     outline: none; 
 }
 
-/* Optional: Styling the placeholder */
 #country-search::placeholder,
 #language-search::placeholder,
 #region-search::placeholder {
@@ -85,46 +89,56 @@ body {
 /* Country Grid & Card Styling */
 .country-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); 
-    gap: 20px;
-    padding: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+    gap: 1.5rem;  
+    padding: 1.5rem; 
 }
 
 .country-card {
     background: white;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: relative;
     transition: transform 0.3s, box-shadow 0.3s;
     overflow: hidden;
     cursor: pointer;
-    height: 250px; 
+    height: auto;  
+}
+
+.country-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Shadow on hover */
 }
 
 /* Country Image Styling */
 .country-card img {
-    width: 150px; 
-    height: 100px; 
-    border-radius: 5px;
+    width: 100%;  
+    height: auto; 
+    border-radius: 0.3rem; 
     object-fit: cover; 
+    transition: transform 0.3s; /* Smooth image hover */
+}
+
+.country-card:hover img {
+    transform: scale(1.05); /* Zoom effect on hover */
 }
 
 /* Country Name Styling */
 .country-name {
-    margin-top: 10px; 
-    font-size: 18px; 
+    margin-top: 0.5rem; 
+    font-size: 1.5rem;  
     color: #333;
     font-weight: bold; 
 }
 
 /* Heart Icon Styling */
 .heart-icon {
-    font-size: 32px; 
+    font-size: 2rem;  
     cursor: pointer;
     position: absolute;
-    bottom: 10px; 
+    bottom: 1rem; 
     left: 50%; 
     transform: translateX(-50%); 
     color: #ccc;
@@ -151,34 +165,55 @@ body {
 
 .modal-content {
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
+    padding: 2rem;  
+    border-radius: 0.5rem;
+    width: 90%;  
     max-width: 500px;
     text-align: left;
     position: relative; 
     animation: fadeIn 0.3s; 
 }
+
 /* Modal Image Styling */
 .modal-content img {
-    width: 80%; /* Adjust width as needed */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 5px; /* Rounded corners for consistency */
-    margin: 0 auto; /* Center the image */
-    display: block; /* Make it a block element */
+    width: 100%; 
+    height: auto; 
+    border-radius: 0.3rem; 
+    margin: 0 auto; 
+    display: block; 
 }
 
 /* Close Button Styling */
 .close-button {
-    font-size: 24px;
+    font-size: 1.5rem;  
     position: absolute;
-    top: 10px;
-    right: 20px;
+    top: 1rem;
+    right: 1.5rem;
     cursor: pointer;
     color: #333;
 }
 
-/* Fade-in animation */
+.suggestions-dropdown {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 200px;
+    display: none; /* Hide by default */
+    z-index: 10;
+}
+
+.suggestions-dropdown div {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestions-dropdown div:hover {
+    background-color: #f0f0f0;
+}
+
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -193,7 +228,7 @@ body {
 
     .nav-links {
         flex-direction: column; 
-        gap: 10px;
+        gap: 0.5rem;
     }
 
     .country-card {
@@ -204,5 +239,3 @@ body {
         width: calc(100% - 20px); 
     }  
 }
-
-

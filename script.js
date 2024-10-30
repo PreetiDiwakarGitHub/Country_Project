@@ -3,22 +3,26 @@ document.addEventListener("DOMContentLoaded", () => {
     const countryModal = document.getElementById("country-modal");
     const countryDetails = document.getElementById("country-details");
     const seeMoreButton = document.getElementById("see-more-button");
+    const favoritesCountElement = document.getElementById("favorites-count");
+    const suggestions = document.getElementById("suggestions");
+    const countrySearch = document.getElementById("country-search");
+
     let countriesData = [];
     let favorites = [];
-    let visibleCountries = 15; // Number of countries to show initially
+    let visibleCountries = 15;
 
     // Fetch country data
     fetch("https://restcountries.com/v3.1/all")
         .then(response => response.json())
         .then(data => {
             countriesData = data;
-            displayCountries(countriesData.slice(0, visibleCountries)); // Display only the first 15 countries
+            displayCountries(countriesData.slice(0, visibleCountries));
         })
         .catch(error => console.error("Error fetching data:", error));
 
     // Display countries
     function displayCountries(countries) {
-        countryList.innerHTML = ""; // Clear previous results
+        countryList.innerHTML = "";
         countries.forEach(country => {
             const countryCard = document.createElement("div");
             countryCard.classList.add("country-card");
@@ -31,14 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
             countryList.appendChild(countryCard);
         });
 
-        // Show/hide the "See More" button
         seeMoreButton.style.display = visibleCountries < countriesData.length ? "block" : "none";
     }
 
     // Load more countries
     window.loadMoreCountries = function() {
-        visibleCountries += 15; // Increment the count
-        displayCountries(countriesData.slice(0, visibleCountries)); // Show updated list of countries
+        visibleCountries += 15;
+        displayCountries(countriesData.slice(0, visibleCountries));
     };
 
     // Show country details in modal
@@ -60,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         countryModal.style.display = "none";
     };
 
-    // Toggle favorite
+    // Toggle favorite country
     window.toggleFavorite = function(countryName, heartIcon) {
         const isFavorited = favorites.includes(countryName);
 
@@ -68,42 +71,28 @@ document.addEventListener("DOMContentLoaded", () => {
             favorites = favorites.filter(name => name !== countryName);
             heartIcon.classList.remove("red");
         } else {
-            favorites.push(countryName);
-            heartIcon.classList.add("red");
+            if (favorites.length < 5) {
+                favorites.push(countryName);
+                heartIcon.classList.add("red");
+                updateFavoritesCount();
+            } else {
+                alert("You can only add up to 5 favorite countries!");
+            }
         }
     };
 
-    // Show all countries
-    window.showAllCountries = function() {
-        visibleCountries = 15; // Reset to initial count
-        displayCountries(countriesData.slice(0, visibleCountries));
-    };
+    // Update favorites count
+    function updateFavoritesCount() {
+        favoritesCountElement.innerText = favorites.length;
+    }
 
-    // Show favorites list
+    // Show favorite countries
     window.showFavorites = function() {
         const favoriteCountries = countriesData.filter(country => favorites.includes(country.name.common));
-        countryList.innerHTML = ""; // Clear the previous list
-
-        favoriteCountries.forEach(country => {
-            const countryCard = document.createElement("div");
-            countryCard.classList.add("country-card", "favorite-country-card");
-
-            countryCard.innerHTML = `
-                <img src="${country.flags.svg}" alt="${country.name.common} Flag">
-                <h3>${country.name.common}</h3>
-                <button class="remove-button" onclick="removeFromFavorites('${country.name.common}')">Remove</button>
-            `;
-            countryList.appendChild(countryCard);
-        });
+        displayCountries(favoriteCountries);
     };
 
-    // Remove from favorites
-    window.removeFromFavorites = function(countryName) {
-        favorites = favorites.filter(name => name !== countryName);
-        showFavorites(); // Refresh the favorites list
-    };
-
-    // Filter countries based on search input
+    // Filter countries based on input
     window.filterCountries = function() {
         const countryInput = document.getElementById("country-search").value.toLowerCase();
         const languageInput = document.getElementById("language-search").value.toLowerCase();
@@ -119,4 +108,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
         displayCountries(filteredCountries);
     };
+
+    // Show suggestions when input is focused
+    window.showSuggestions = function () {
+        suggestions.style.display = "block";
+        displaySuggestions(countriesData.map(c => c.name.common));
+    };
+
+    // Filter suggestions based on input
+    window.filterSuggestions = function () {
+        const searchValue = countrySearch.value.toLowerCase();
+        const filteredCountries = countriesData
+            .map(c => c.name.common)
+            .filter(country => country.toLowerCase().includes(searchValue));
+        displaySuggestions(filteredCountries);
+    };
+
+    // Display suggestions in the dropdown, limited to five names
+    function displaySuggestions(list) {
+        suggestions.innerHTML = ""; // Clear previous suggestions
+
+        list.slice(0, 4).forEach(country => { // Limit to 5 suggestions
+            const suggestionItem = document.createElement("div");
+            suggestionItem.textContent = country;
+
+            // When a suggestion is clicked, set it as the input value
+            suggestionItem.addEventListener("click", () => {
+                countrySearch.value = country;
+                suggestions.style.display = "none"; // Hide suggestions after selection
+                filterCountries(); // Trigger filtering based on selected suggestion
+            });
+
+            suggestions.appendChild(suggestionItem);
+        });
+    }
+
+    // Hide suggestions when clicking outside
+    document.addEventListener("click", (event) => {
+        if (!countrySearch.contains(event.target) && !suggestions.contains(event.target)) {
+            suggestions.style.display = "none";
+        }
+    });
 });
