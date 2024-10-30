@@ -1,0 +1,208 @@
+/* General Body and Navbar Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    background-color: #007bff;
+    padding: 15px 20px; 
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.logo {
+    font-size: 24px; 
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s; 
+}
+
+.nav-links a:hover {
+    color: #ff3b3b; 
+}
+
+/* Count Style */
+.favorites-count {
+    background: hsl(26, 100%, 62%); /* Yellow background for visibility */
+    border-radius: 10px; /* Rounded corners */
+    padding: 3px 8px; /* Padding for better appearance */
+    font-weight: bold;
+    margin-left: 5px; /* Space between link and count */
+}
+
+/* Search Container Styling */
+.search-container {
+    padding: 20px;
+    text-align: center;
+    background-color: #ffffff; 
+    border-radius: 8px; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    margin: 20px; 
+}
+
+#country-search, #language-search, #region-search {
+    padding: 10px 15px; 
+    margin: 5px; 
+    border: 2px solid #007bff; 
+    border-radius: 5px; 
+    font-size: 16px; 
+    transition: border-color 0.3s, box-shadow 0.3s; 
+}
+
+#country-search:focus, 
+#language-search:focus, 
+#region-search:focus {
+    border-color: #0056b3; 
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); 
+    outline: none; 
+}
+
+/* Optional: Styling the placeholder */
+#country-search::placeholder,
+#language-search::placeholder,
+#region-search::placeholder {
+    color: #aaa; 
+    font-style: italic; 
+}
+
+/* Country Grid & Card Styling */
+.country-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+    gap: 20px;
+    padding: 20px;
+}
+
+.country-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+    cursor: pointer;
+    height: 250px; 
+}
+
+/* Country Image Styling */
+.country-card img {
+    width: 150px; 
+    height: 100px; 
+    border-radius: 5px;
+    object-fit: cover; 
+}
+
+/* Country Name Styling */
+.country-name {
+    margin-top: 10px; 
+    font-size: 18px; 
+    color: #333;
+    font-weight: bold; 
+}
+
+/* Heart Icon Styling */
+.heart-icon {
+    font-size: 32px; 
+    cursor: pointer;
+    position: absolute;
+    bottom: 10px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    color: #ccc;
+    transition: color 0.3s; 
+}
+
+.heart-icon.red {
+    color: red; 
+}
+
+/* Modal Styling */
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000; 
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    text-align: left;
+    position: relative; 
+    animation: fadeIn 0.3s; 
+}
+/* Modal Image Styling */
+.modal-content img {
+    width: 80%; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners for consistency */
+    margin: 0 auto; /* Center the image */
+    display: block; /* Make it a block element */
+}
+
+/* Close Button Styling */
+.close-button {
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+
+    .nav-links {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    .country-card {
+        height: auto; 
+    }
+
+    #country-search, #language-search, #region-search {
+        width: calc(100% - 20px); 
+    }  
+}
+
+

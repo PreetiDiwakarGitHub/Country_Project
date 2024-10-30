@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Country Explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar Section -->
+  <header class="navbar">
+    <div class="logo">Country Explorer</div>
+    <ul class="nav-links">
+      <li><a href="#all-countries" onclick="showAllCountries()">All Countries</a></li>
+      <li>
+        <a href="#favorites" onclick="showFavorites()">Favorites</a>
+        <span id="favorites-count" class="favorites-count">0</span> <!-- Favorite count -->
+      </li>
+    </ul>
+  </header>
+
+  <!-- Search Container -->
+  <div class="search-container">
+    <input type="text" id="country-search" placeholder="Search by country name..." oninput="filterCountries()">
+    <input type="text" id="language-search" placeholder="Search by language..." oninput="filterCountries()">
+    <input type="text" id="region-search" placeholder="Search by region..." oninput="filterCountries()">
+  </div>
+
+  <!-- Country List Container -->
+  <div id="country-list" class="country-grid"></div>
+
+  <!-- Country Details Modal -->
+  <div id="country-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal()">&times;</span>
+      <div id="country-details"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
